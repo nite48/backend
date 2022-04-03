@@ -1,4 +1,4 @@
-Проект Movies-explorer-api
+Проект hospital-api
 Директории
 /routes — папка с файлами роутера
 /controllers — папка с файлами контроллеров пользователя и карточки
@@ -10,5 +10,3 @@
 npm run start — запускает сервер
 npm run dev — запускает сервер с hot-reload
 
-* [Link to server](https://api.movie.copy.project.nomoredomains.work/)
-* Публичный ip - 178.154.201.248
