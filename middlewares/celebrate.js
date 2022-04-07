@@ -1,12 +1,12 @@
 const { celebrate, Joi } = require('celebrate');
-const { isURL } = require('validator');
+// const { isURL } = require('validator');
 
-const checkURL = (value) => {
-  if (!isURL(value, { require_protocol: true })) {
-    throw new Error('Неправильный формат ссылки');
-  }
-  return value;
-};
+// // const checkURL = (value) => {
+// //   if (!isURL(value, { require_protocol: true })) {
+// //     throw new Error('Неправильный формат ссылки');
+// //   }
+// //   return value;
+// // };
 const createUserValidator = celebrate({
   body: Joi.object().keys({
     email: Joi.string().email().required(),
@@ -30,22 +30,14 @@ const updateUserValidator = celebrate({
   }),
 });
 
-const createMoviesValidator = celebrate({
+const createWriteValidator = celebrate({
   body: Joi.object().keys({
-    country: Joi.string().required(),
-    director: Joi.string().required(),
-    duration: Joi.number().required(),
-    year: Joi.string().required(),
-    description: Joi.string().required(),
-    image: Joi.string().required().custom(checkURL),
-    trailer: Joi.string().required().custom(checkURL),
-    thumbnail: Joi.string().required().custom(checkURL),
-    movieId: Joi.number().required(),
-    nameRU: Joi.string().required(),
-    nameEN: Joi.string().required(),
+    dateBirth: Joi.date().required(),
+    doctor: Joi.string().required(),
+    dateWtire: Joi.date().required(),
+    time: Joi.string().required(),
   }),
 });
-
 const deleteMoviesValidator = celebrate({
   params: Joi.object().keys({
     movieId: Joi.string().required().length(24).hex(),
@@ -55,7 +47,7 @@ const deleteMoviesValidator = celebrate({
 module.exports = {
   createUserValidator,
   loginValidator,
-  createMoviesValidator,
+  createWriteValidator,
   updateUserValidator,
   deleteMoviesValidator,
 };

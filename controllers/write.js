@@ -1,4 +1,4 @@
-const Movie = require('../models/movie');
+const Write = require('../models/write');
 const NotFoundError = require('../errors/NotFoundError');
 const BadRequestError = require('../errors/BadRequestError');
 const ForbiddenError = require('../errors/ForbiddenError');
@@ -7,29 +7,18 @@ const ConflictError = require('../errors/ConflictError');
 
 module.exports.getDoctorsWrite = (req, res, next) => {
   const owner = req.user._id;
-  Movie.find({ owner })
+  Write.find({ owner })
     .then((movies) => res.status(200).send(movies))
     .catch((err) => next(new InternalError(err)));
 };
 
-module.exports.createMovies = (req, res, next) => {
+module.exports.writeDoctor = (req, res, next) => {
+  console.info(req.body);
   const {
-    country, director, duration, year, description,
-    image, trailer, nameRU, nameEN, thumbnail, movieId,
+    dateBirth, doctor, dateWtire, time,
   } = req.body;
-  Movie.create({
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailer,
-    nameRU,
-    nameEN,
-    thumbnail,
-    movieId,
-    owner: req.user._id,
+  Write.create({
+    dateBirth, doctor, dateWtire, time,
   })
     .then((movie) => res.status(200).send(movie))
     .catch((err) => {
@@ -45,7 +34,7 @@ module.exports.createMovies = (req, res, next) => {
 };
 
 module.exports.deleteMovies = (req, res, next) => {
-  Movie.findById(req.params.movieId)
+  Write.findById(req.params.movieId)
     .then((movie) => {
       if (!movie) {
         return next(new NotFoundError('Не найден фильм по переданному id'));
