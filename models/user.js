@@ -3,6 +3,12 @@ const bcrypt = require('bcryptjs');
 const { isEmail } = require('validator');
 
 const userSchema = new mongoose.Schema({
+  family: {
+    type: String,
+    minlength: 2,
+    maxlength: 30,
+    required: true,
+  },
   name: {
     type: String,
     minlength: 2,

@@ -31,14 +31,14 @@ module.exports.login = (req, res, next) => {
 
 module.exports.createUser = (req, res, next) => {
   console.info(req.body);
-  const { email, password, name, role } = req.body;
+  const { email, password, name, role, family } = req.body;
   bcrypt
     .hash(password, 10)
     .then((hash) => User.create({
-      name, email, password: hash, role,
+      family, name, email, password: hash, role,
     }))
     .then(() => res.status(200).send({
-      name, email,
+      family, name, email,
     }))
     .catch((err) => {
       if (err.name === 'ValidationError') {

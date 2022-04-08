@@ -8,17 +8,17 @@ const ConflictError = require('../errors/ConflictError');
 module.exports.getDoctorsWrite = (req, res, next) => {
   const owner = req.user._id;
   Write.find({ owner })
-    .then((movies) => res.status(200).send(movies))
+    .then((write) => res.status(200).send(write))
     .catch((err) => next(new InternalError(err)));
 };
 
 module.exports.writeDoctor = (req, res, next) => {
   console.info(req.body);
   const {
-    dateBirth, doctor, dateWtire, time,
+    dateBirth, doctor, dateWtire, time, name, family,
   } = req.body;
   Write.create({
-    dateBirth, doctor, dateWtire, time,
+    dateBirth, doctor, dateWtire, time, name, family,
   })
     .then((movie) => res.status(200).send(movie))
     .catch((err) => {

@@ -17,6 +17,18 @@ const Write = new mongoose.Schema({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    minlength: 2,
+    maxlength: 30,
+    required: true,
+  },
+  family: {
+    type: String,
+    minlength: 2,
+    maxlength: 30,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('writePacient', Write);
