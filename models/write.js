@@ -29,6 +29,11 @@ const Write = new mongoose.Schema({
     maxlength: 30,
     required: true,
   },
+  owner: {
+    type: String,
+    ref: 'user',
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('writePacient', Write);

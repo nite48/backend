@@ -1,4 +1,5 @@
 const Write = require('../models/write');
+// const userSchema = require('../models/write');
 const NotFoundError = require('../errors/NotFoundError');
 const BadRequestError = require('../errors/BadRequestError');
 const ForbiddenError = require('../errors/ForbiddenError');
@@ -7,7 +8,15 @@ const ConflictError = require('../errors/ConflictError');
 
 module.exports.getDoctorsWrite = (req, res, next) => {
   const owner = req.user._id;
+  console.info(owner);
   Write.find({ owner })
+    .then((write) => res.status(200).send(write))
+    .catch((err) => next(new InternalError(err)));
+};
+module.exports.getDoctorsWriteRead = (req, res, next) => {
+  console.info(req.user._id);
+  const id = req.user._id;
+  Write.find({ id })
     .then((write) => res.status(200).send(write))
     .catch((err) => next(new InternalError(err)));
 };
@@ -15,10 +24,10 @@ module.exports.getDoctorsWrite = (req, res, next) => {
 module.exports.writeDoctor = (req, res, next) => {
   console.info(req.body);
   const {
-    dateBirth, doctor, dateWtire, time, name, family,
+    dateBirth, doctor, dateWtire, time, name, family, owner,
   } = req.body;
   Write.create({
-    dateBirth, doctor, dateWtire, time, name, family,
+    dateBirth, doctor, dateWtire, time, name, family, owner,
   })
     .then((movie) => res.status(200).send(movie))
     .catch((err) => {

@@ -14,6 +14,7 @@ const createUserValidator = celebrate({
     name: Joi.string().min(2).max(30),
     role: Joi.string(),
     family: Joi.string().min(2).max(30),
+    otchestvo: Joi.string().min(2).max(30),
   }),
 });
 
@@ -39,6 +40,7 @@ const createWriteValidator = celebrate({
     time: Joi.string().required(),
     name: Joi.string().min(2).max(30),
     family: Joi.string().min(2).max(30),
+    owner: Joi.string().required(),
   }),
 });
 const deleteMoviesValidator = celebrate({
