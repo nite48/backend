@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 const nodemailer = require('nodemailer');
 const Write = require('../models/write');
+const Time = require('../models/time');
 // const userSchema = require('../models/write');
 const NotFoundError = require('../errors/NotFoundError');
 const BadRequestError = require('../errors/BadRequestError');
@@ -35,6 +36,15 @@ module.exports.getDoctorsWriteRead = (req, res, next) => {
     .catch((err) => next(new InternalError(err)));
 };
 
+module.exports.getDoctorsTime = (req, res, next) => {
+  console.info(req.body.time);
+  const { time } = req.body;
+  console.info(time);
+  Time.findOne({ date: time })
+    .then((write) => res.status(200).send(write))
+    .catch((err) => next(new InternalError(err)));
+};
+
 module.exports.writeDoctor = (req, res, next) => {
   console.info(req.body);
   const {
@@ -44,14 +54,6 @@ module.exports.writeDoctor = (req, res, next) => {
     dateBirth, doctor, dateWtire, time, name, family, owner,
   })
     .then((movie) => {
-      const resultMail = transporter.sendMail({
-        from: '"Здоровье ЛГТУ" <servicesmpt3@gmail.com',
-        to: 'servicesmpt3@gmail.com',
-        subject: 'Сообщение от Клиники Здоровье ЛГТУ',
-        text: 'Вы записаны к врачу ',
-        html:
-          `Вы записаны ${dateWtire} в ${time} к врачу ${doctor}. Для получения дополнительной информаци свяжитесь с нами по телефонам 8-800-535-35-35   8-800-250-00-0`,
-      });
       // eslint-disable-next-line brace-style
       res.status(200).send(movie); })
     .catch((err) => {
@@ -505,14 +507,6 @@ module.exports.deleteMovies = (req, res, next) => {
       }
       return movie.remove()
         .then((result) => {
-          const resultMail = transporter.sendMail({
-            from: '"Здоровье ЛГТУ" <servicesmpt3@gmail.com',
-            to: 'servicesmpt3@gmail.com',
-            subject: 'Сообщение от Клиники Здоровье ЛГТУ',
-            text: 'Вы записаны к врачу ',
-            html:
-              `Ваша запись ${result.dateWtire} в ${result.time} к врачу ${result.doctor} отменена! <img src={<img src={./operationskey.png} />`,
-          });
           // eslint-disable-next-line brace-style
           res.send(result); });
     })
