@@ -141,7 +141,7 @@ module.exports.writeLogistic = (req, res, next) => {
   const {
     medicalHome, timeYear, countPatient, latitude, longitude,
   } = req.body;
-  if (medicalHome === 'Липецкая городская больница № 4') {
+  if (medicalHome === 'Липецкая городская поликлиника № 1') {
     const day = new Date();
     const time = `${day.getHours()}:${day.getMinutes()}:${day.getSeconds()}`;
     if (time > '16:00:00' && time < '19:00:00') {
@@ -197,7 +197,7 @@ module.exports.writeLogistic = (req, res, next) => {
     } else {
       res.status(200).send({ time: 'Переданы некорректные данные' });
     }
-  } else if (medicalHome === 'Липецкая городская больница № 6') {
+  } else if (medicalHome === 'Липецкая городская поликлиника № 2') {
     const day = new Date();
     const time = `${day.getHours()}:${day.getMinutes()}:${day.getSeconds()}`;
     if (time > '16:00:00' && time < '19:00:00') {
@@ -253,7 +253,7 @@ module.exports.writeLogistic = (req, res, next) => {
     } else {
       res.status(200).send({ time: 'Переданы некорректные данные' });
     }
-  } else if (medicalHome === 'Липецкая областная больница') {
+  } else if (medicalHome === 'Липецкая городская поликлиника № 3') {
     const day = new Date();
     const time = `${day.getHours()}:${day.getMinutes()}:${day.getSeconds()}`;
     if (time > '16:00:00' && time < '19:00:00') {
@@ -309,7 +309,7 @@ module.exports.writeLogistic = (req, res, next) => {
     } else {
       res.status(200).send({ time: 'Переданы некорректные данные' });
     }
-  } else if (medicalHome === 'Липецкий областной клинический центр') {
+  } else if (medicalHome === 'Липецкая городская поликлиника № 4') {
     const day = new Date();
     const time = `${day.getHours()}:${day.getMinutes()}:${day.getSeconds()}`;
     if (time > '16:00:00' && time < '19:00:00') {
@@ -365,7 +365,7 @@ module.exports.writeLogistic = (req, res, next) => {
     } else {
       res.status(200).send({ time: 'Переданы некорректные данные' });
     }
-  } else if (medicalHome === 'ГБСМП №1') {
+  } else if (medicalHome === 'Липецкая городская поликлиника № 5') {
     const day = new Date();
     const time = `${day.getHours()}:${day.getMinutes()}:${day.getSeconds()}`;
     if (time > '16:00:00' && time < '19:00:00') {
@@ -421,7 +421,63 @@ module.exports.writeLogistic = (req, res, next) => {
     } else {
       res.status(200).send({ time: 'Переданы некорректные данные' });
     }
-  } else if (medicalHome === 'Липецкая областная клиническая инфекционная больница') {
+  } else if (medicalHome === 'Липецкая городская поликлиника № 6') {
+    const day = new Date();
+    const time = `${day.getHours()}:${day.getMinutes()}:${day.getSeconds()}`;
+    if (time > '16:00:00' && time < '19:00:00') {
+      if (timeYear === 'Весна') {
+        res.status(200).send({ time: '1ч:15мин' });
+      } else if (timeYear === 'Лето') {
+        res.status(200).send({ time: '1ч:10мин' });
+      } else if (timeYear === 'Осень') {
+        res.status(200).send({ time: '1ч:35мин' });
+      } else if (timeYear === 'Зима') {
+        res.status(200).send({ time: '2ч:03мин' });
+      }
+    } else if (time > '07:30:00' && time < '09:30:00') {
+      if (timeYear === 'Весна') {
+        res.status(200).send({ time: '1ч:15мин' });
+      } else if (timeYear === 'Лето') {
+        res.status(200).send({ time: '1ч:10мин' });
+      } else if (timeYear === 'Осень') {
+        res.status(200).send({ time: '1ч:35мин' });
+      } else if (timeYear === 'Зима') {
+        res.status(200).send({ time: '2ч:03мин' });
+      }
+    } else if (time >= '09:30:00' && time <= '16:00:00') {
+      if (timeYear === 'Весна') {
+        res.status(200).send({ time: '1ч:01мин' });
+      } else if (timeYear === 'Лето') {
+        res.status(200).send({ time: '50мин' });
+      } else if (timeYear === 'Осень') {
+        res.status(200).send({ time: '1ч:10мин' });
+      } else if (timeYear === 'Зима') {
+        res.status(200).send({ time: '1ч:30мин' });
+      }
+    } else if (time >= '19:00:00' && time <= '23:59:59') {
+      if (timeYear === 'Весна') {
+        res.status(200).send({ time: '50мин' });
+      } else if (timeYear === 'Лето') {
+        res.status(200).send({ time: '45мин' });
+      } else if (timeYear === 'Осень') {
+        res.status(200).send({ time: '1ч:02мин' });
+      } else if (timeYear === 'Зима') {
+        res.status(200).send({ time: '1ч:10мин' });
+      }
+    } else if (time >= '00:00:00' && time <= '07:30:00') {
+      if (timeYear === 'Весна') {
+        res.status(200).send({ time: '50мин' });
+      } else if (timeYear === 'Лето') {
+        res.status(200).send({ time: '45мин' });
+      } else if (timeYear === 'Осень') {
+        res.status(200).send({ time: '1ч:02мин' });
+      } else if (timeYear === 'Зима') {
+        res.status(200).send({ time: '1ч:10мин' });
+      }
+    } else {
+      res.status(200).send({ time: 'Переданы некорректные данные' });
+    }
+  } else if (medicalHome === 'Липецкая городская поликлиника № 7') {
     const day = new Date();
     const time = `${day.getHours()}:${day.getMinutes()}:${day.getSeconds()}`;
     if (time > '16:00:00' && time < '19:00:00') {
